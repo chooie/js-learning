@@ -18,7 +18,7 @@
      *   twice, storing an extra copy of the supertype's properties on the
      *   subtype's prototype (waste of memory).
      * - It preserves the prototype chain, so instanceof and isPrototypeOf()
-     *   behave normally. I.e. 'subInstance instanceof SuperType' returns true;
+     *   behave normally. I.e. 'subInstance instanceof SuperType' returns true.
      */
 
     /**
