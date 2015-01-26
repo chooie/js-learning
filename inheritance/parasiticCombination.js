@@ -47,13 +47,17 @@
      * @param {String} name
      */
     function SuperType(name) {
-        this.name = name;
-        this.colors = ["red", "blue", "green"];
+        if (this instanceof SuperType) {
+            this.name = name;
+            this.colors = ["red", "blue", "green"];
+        } else {
+            return new SuperType(name);
+        }
     }
 
     SuperType.prototype.sayName = function() {
         console.log(this.name);
-    }
+    };
 
     /**
      * Some SubType
@@ -61,8 +65,12 @@
      * @param {Number} age
      */
     function SubType(name, age) {
-        SuperType.call(this, name);
-        this.age = age;
+        if (this instanceof SubType) {
+            SuperType.call(this, name);
+            this.age = age;
+        } else {
+            return new SubType(name, age);
+        }
     }
 
     // Use our function to correctly inherit SuperType's prototype
@@ -70,7 +78,7 @@
 
     SubType.prototype.sayAge = function() {
         console.log(this.name + " is " + this.age + ".");
-    }
+    };
 
     /**
      * Test it out
@@ -86,5 +94,6 @@
     console.log(superTypeInstance instanceof SuperType); // true
     console.log(superTypeInstance instanceof SubType); // false
     console.log(SubType.prototype.isPrototypeOf(superTypeInstance)); // false
+    superTypeInstance.sayName(); // Charlie
     superTypeInstance.sayAge(); // Error
 }());
